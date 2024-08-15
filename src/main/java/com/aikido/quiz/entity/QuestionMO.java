@@ -1,6 +1,7 @@
 package com.aikido.quiz.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,11 @@ public class QuestionMO {
     @Column(name = "question_states")
     private String questionState;
 
+    @Column(name = "correct_answers")
+    private String correctAnswer;
+
     @ManyToMany
+    @JsonManagedReference
     @JoinTable(
             name = "question_response",
             joinColumns = @JoinColumn(name = "question_id"),
@@ -25,16 +30,16 @@ public class QuestionMO {
     )
     private Set<ResponseMO> responses = new HashSet<>();
 
-    public QuestionMO(long questionID, String questionState, Set<ResponseMO> responses) {
+
+    public QuestionMO(long questionID, String questionState, String correctAnswer, Set<ResponseMO> responses) {
         this.questionID = questionID;
         this.questionState = questionState;
+        this.correctAnswer = correctAnswer;
         this.responses = responses;
     }
 
     public QuestionMO() {
     }
-
-    // Getters and setters
 
     public long getQuestionID() {
         return questionID;
@@ -52,6 +57,14 @@ public class QuestionMO {
         this.questionState = questionState;
     }
 
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
     public Set<ResponseMO> getResponses() {
         return responses;
     }
@@ -65,6 +78,7 @@ public class QuestionMO {
         return "QuestionMO{" +
                 "questionID=" + questionID +
                 ", questionState='" + questionState + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
                 ", responses=" + responses +
                 '}';
     }

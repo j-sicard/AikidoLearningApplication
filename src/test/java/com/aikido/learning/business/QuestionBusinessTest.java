@@ -23,39 +23,39 @@ public class QuestionBusinessTest {
     // -- getQuestions test -- //
     @Test
     void getQuestionsTest(){
-        assertTrue(questionBusiness.getQuestions().size() > 0);
+        assertTrue(questionBusiness.findQuestionsWithResponses().size() > 0);
     }
 
     // -- getQuestionById tests -- //
     @Test
     void getQuestionByIdIsPresentTest(){
-        assertTrue(questionBusiness.getQuestionById(1L).isPresent());
+        assertTrue(questionBusiness.findQuestionWithResponsesById(1L).isPresent());
     }
 
     @Test
     void getQuestionByIdIsSuccessTest(){
-        assertTrue(questionBusiness.getQuestionById(1L).get().getQuestionState().equals("TACHI WAZA"));
+        assertTrue(questionBusiness.findQuestionWithResponsesById(1L).get().getQuestionState().equals("TACHI WAZA"));
     }
 
     @Test
     void getQuestionByIdIsFailureTest(){
-        assertTrue(questionBusiness.getQuestionById(0L).isEmpty());
+        assertTrue(questionBusiness.findQuestionWithResponsesById(0L).isEmpty());
     }
 
     // -- getRandomQuestion tests -- //
     @RepeatedTest(100)
     void randomQuestionIdValueMoreZeroTest(){
-        assertTrue(questionBusiness.getRandomQuestion().get().getQuestionID() > 0);
+        assertTrue(questionBusiness.findRandomQuestionWithResponsesById().get().getQuestionID() > 0);
     }
 
     @RepeatedTest(100)
     void randomQuestionIdValueless4Test(){
-        assertTrue(questionBusiness.getRandomQuestion().get().getQuestionID() < 5);
+        assertTrue(questionBusiness.findRandomQuestionWithResponsesById().get().getQuestionID() < 5);
     }
 
     @RepeatedTest(100)
     void randomQuestionIdValueNotNullIdTest(){
-        assertNotNull(questionBusiness.getRandomQuestion().get().getQuestionID());
+        assertNotNull(questionBusiness.findRandomQuestionWithResponsesById().get().getQuestionID());
     }
 
 }

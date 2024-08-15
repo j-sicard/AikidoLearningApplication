@@ -56,12 +56,6 @@ public class ResponseMO {
         this.questions = questions;
     }
 
-    @Override
-    public String toString() {
-        return "ResponseMO{" +
-                "responseId=" + responseId +
-                ", responseStates='" + responseStates + '\'' +
-                ", questions=" + questions +
-                '}';
-    }
+
+
 }

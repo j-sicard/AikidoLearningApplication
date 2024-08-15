@@ -25,21 +25,21 @@ public class QuestionBusinessImpl implements QuestionBusiness {
     @Autowired
     RandomNumberManager randomNumberManager;
 
-    public List<QuestionMO> getQuestions(){
+    public List<QuestionMO> findQuestionsWithResponses(){
         List<QuestionMO> questions = questionService.findQuestions();
         logger.info("Fetched questions: {}", questions);
         return questions;
     }
 
-    public Optional<QuestionMO> getQuestionById(long id){
+    public Optional<QuestionMO> findQuestionWithResponsesById(long id){
         return questionService.findQuestionByID(id);
     }
 
-    public Optional<QuestionMO> getRandomQuestion(){
+    public Optional<QuestionMO> findRandomQuestionWithResponsesById(){
         return questionService.findQuestionByID(randomNumberManager.generateRandomInt());
     }
 
-    public Set<ResponseMO> getResponsesByQuestionId(long id){
+    public Set<ResponseMO> getResponseByQuestionId(long id){
         return questionService.findResponseByQuestionId(id);
     }
 }

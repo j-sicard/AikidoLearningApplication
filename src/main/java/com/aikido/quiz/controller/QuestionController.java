@@ -21,23 +21,23 @@ public class QuestionController {
     QuestionBusiness questionBusiness;
 
     @GetMapping("/list")
-    public List<QuestionMO> getQuestions(){
-        return questionBusiness.getQuestions();
+    public List<QuestionMO> getQuestionsWithResponses(){
+        return questionBusiness.findQuestionsWithResponses();
     }
 
     @GetMapping("/{id}")
-    public Optional<QuestionMO> getQuestionById(@PathVariable long id){
-        return questionBusiness.getQuestionById(id);
+    public Optional<QuestionMO> getQuestionWithResponsesById(@PathVariable long id){
+        return questionBusiness.findQuestionWithResponsesById(id);
     }
 
     @GetMapping("/random")
-    public Optional<QuestionMO> getRandomQuestion(){
-        return questionBusiness.getRandomQuestion();
+    public Optional<QuestionMO> getRandomQuestionWithResponsesById(){
+        return questionBusiness.findRandomQuestionWithResponsesById();
     }
 
     @GetMapping("/response/{id}")
-    public Set<ResponseMO> getResponsesByQuestionId(@PathVariable long id){
-        return questionBusiness.getResponsesByQuestionId(id);
+    public Set<ResponseMO> getResponseByQuestionId(@PathVariable long id){
+        return questionBusiness.getResponseByQuestionId(id);
     }
 }
 

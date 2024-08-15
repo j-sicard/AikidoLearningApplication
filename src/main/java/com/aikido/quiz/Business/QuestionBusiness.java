@@ -8,11 +8,11 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface QuestionBusiness {
-    public List<QuestionMO> getQuestions();
+    public List<QuestionMO> findQuestionsWithResponses();
 
-    public Optional<QuestionMO> getQuestionById(long id);
+    public Optional<QuestionMO> findQuestionWithResponsesById(long id);
 
-    public Optional<QuestionMO> getRandomQuestion();
+    public Optional<QuestionMO> findRandomQuestionWithResponsesById();
 
-    public Set<ResponseMO> getResponsesByQuestionId(long id);
+    public Set<ResponseMO> getResponseByQuestionId(long id);
 }
