@@ -1,6 +1,5 @@
 package com.aikido.quiz.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.HashSet;
@@ -18,9 +17,6 @@ public class QuestionMO {
     @Column(name = "question_states")
     private String questionState;
 
-    @Column(name = "correct_answers")
-    private String correctAnswer;
-
     @ManyToMany
     @JsonManagedReference
     @JoinTable(
@@ -30,12 +26,16 @@ public class QuestionMO {
     )
     private Set<ResponseMO> responses = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "correction_of_the_answer_id", referencedColumnName = "correction_of_the_answer_id")
+    private CorrectionOfTheAnswer correctionOfTheAnswer;
 
-    public QuestionMO(long questionID, String questionState, String correctAnswer, Set<ResponseMO> responses) {
+
+    public QuestionMO(long questionID, String questionState, Set<ResponseMO> responses, CorrectionOfTheAnswer correctionOfTheAnswer) {
         this.questionID = questionID;
         this.questionState = questionState;
-        this.correctAnswer = correctAnswer;
         this.responses = responses;
+        this.correctionOfTheAnswer = correctionOfTheAnswer;
     }
 
     public QuestionMO() {
@@ -57,14 +57,6 @@ public class QuestionMO {
         this.questionState = questionState;
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
-
     public Set<ResponseMO> getResponses() {
         return responses;
     }
@@ -73,13 +65,21 @@ public class QuestionMO {
         this.responses = responses;
     }
 
+    public CorrectionOfTheAnswer getCorrectionOfTheAnswer() {
+        return correctionOfTheAnswer;
+    }
+
+    public void setCorrectionOfTheAnswer(CorrectionOfTheAnswer correctionOfTheAnswer) {
+        this.correctionOfTheAnswer = correctionOfTheAnswer;
+    }
+
     @Override
     public String toString() {
         return "QuestionMO{" +
                 "questionID=" + questionID +
                 ", questionState='" + questionState + '\'' +
-                ", correctAnswer='" + correctAnswer + '\'' +
                 ", responses=" + responses +
+                ", correctionOfTheAnswer=" + correctionOfTheAnswer +
                 '}';
     }
 }
