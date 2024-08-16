@@ -1,11 +1,15 @@
 package com.aikido.quiz.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "correction_of_the_answers")
-public class CorrectionOfTheAnswer {
+public class CorrectionOfTheAnswerMO {
 
 
     @Id
@@ -22,6 +26,26 @@ public class CorrectionOfTheAnswer {
     @JsonIgnore
     @OneToOne(mappedBy = "correctionOfTheAnswer")
     private QuestionMO question;
+
+    @ManyToMany
+    @JsonManagedReference
+    @JoinTable(
+            name = "CorrectionOfTheAnswer_response",
+            joinColumns = @JoinColumn(name = "correction_of_the_answer_id"),
+            inverseJoinColumns = @JoinColumn(name = "response_id")
+    )
+    private Set<ResponseMO> responses = new HashSet<>();
+
+    public CorrectionOfTheAnswerMO(long correctionOfTheAnswerId, String messageForAGoodAnswer, String messageForWrongAnswer, QuestionMO question, Set<ResponseMO> responses) {
+        this.correctionOfTheAnswerId = correctionOfTheAnswerId;
+        this.messageForAGoodAnswer = messageForAGoodAnswer;
+        this.messageForWrongAnswer = messageForWrongAnswer;
+        this.question = question;
+        this.responses = responses;
+    }
+
+    public CorrectionOfTheAnswerMO() {
+    }
 
     public long getCorrectionOfTheAnswerId() {
         return correctionOfTheAnswerId;
@@ -55,12 +79,22 @@ public class CorrectionOfTheAnswer {
         this.question = question;
     }
 
+    public Set<ResponseMO> getResponses() {
+        return responses;
+    }
+
+    public void setResponses(Set<ResponseMO> responses) {
+        this.responses = responses;
+    }
+
     @Override
     public String toString() {
         return "CorrectionOfTheAnswer{" +
                 "correctionOfTheAnswerId=" + correctionOfTheAnswerId +
                 ", messageForAGoodAnswer='" + messageForAGoodAnswer + '\'' +
                 ", messageForWrongAnswer='" + messageForWrongAnswer + '\'' +
+                ", question=" + question +
+                ", responses=" + responses +
                 '}';
     }
 }

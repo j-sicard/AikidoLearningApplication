@@ -21,6 +21,10 @@ public class ResponseMO {
     @ManyToMany(mappedBy = "responses")
     private Set<QuestionMO> questions = new HashSet<>();
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "responses")
+    private Set<CorrectionOfTheAnswerMO> correctionOfTheAnswers = new HashSet<>();
+
     public ResponseMO(long responseId, String responseStates, Set<QuestionMO> questions) {
         this.responseId = responseId;
         this.responseStates = responseStates;

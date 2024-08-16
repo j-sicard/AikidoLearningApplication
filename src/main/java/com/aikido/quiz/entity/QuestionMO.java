@@ -28,10 +28,10 @@ public class QuestionMO {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "correction_of_the_answer_id", referencedColumnName = "correction_of_the_answer_id")
-    private CorrectionOfTheAnswer correctionOfTheAnswer;
+    private CorrectionOfTheAnswerMO correctionOfTheAnswer;
 
 
-    public QuestionMO(long questionID, String questionState, Set<ResponseMO> responses, CorrectionOfTheAnswer correctionOfTheAnswer) {
+    public QuestionMO(long questionID, String questionState, Set<ResponseMO> responses, CorrectionOfTheAnswerMO correctionOfTheAnswer) {
         this.questionID = questionID;
         this.questionState = questionState;
         this.responses = responses;
@@ -65,11 +65,11 @@ public class QuestionMO {
         this.responses = responses;
     }
 
-    public CorrectionOfTheAnswer getCorrectionOfTheAnswer() {
+    public CorrectionOfTheAnswerMO getCorrectionOfTheAnswer() {
         return correctionOfTheAnswer;
     }
 
-    public void setCorrectionOfTheAnswer(CorrectionOfTheAnswer correctionOfTheAnswer) {
+    public void setCorrectionOfTheAnswer(CorrectionOfTheAnswerMO correctionOfTheAnswer) {
         this.correctionOfTheAnswer = correctionOfTheAnswer;
     }
 
