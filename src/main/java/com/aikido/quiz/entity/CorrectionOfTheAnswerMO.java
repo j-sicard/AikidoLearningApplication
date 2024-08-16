@@ -1,6 +1,5 @@
 package com.aikido.quiz.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -23,10 +22,6 @@ public class CorrectionOfTheAnswerMO {
     @Column(name = "message_for_wrong_answer")
     private String messageForWrongAnswer;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "correctionOfTheAnswer")
-    private QuestionMO question;
-
     @ManyToMany
     @JsonManagedReference
     @JoinTable(
@@ -36,11 +31,10 @@ public class CorrectionOfTheAnswerMO {
     )
     private Set<ResponseMO> responses = new HashSet<>();
 
-    public CorrectionOfTheAnswerMO(long correctionOfTheAnswerId, String messageForAGoodAnswer, String messageForWrongAnswer, QuestionMO question, Set<ResponseMO> responses) {
+    public CorrectionOfTheAnswerMO(long correctionOfTheAnswerId, String messageForAGoodAnswer, String messageForWrongAnswer, Set<ResponseMO> responses) {
         this.correctionOfTheAnswerId = correctionOfTheAnswerId;
         this.messageForAGoodAnswer = messageForAGoodAnswer;
         this.messageForWrongAnswer = messageForWrongAnswer;
-        this.question = question;
         this.responses = responses;
     }
 
@@ -71,14 +65,6 @@ public class CorrectionOfTheAnswerMO {
         this.messageForWrongAnswer = messageForWrongAnswer;
     }
 
-    public QuestionMO getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(QuestionMO question) {
-        this.question = question;
-    }
-
     public Set<ResponseMO> getResponses() {
         return responses;
     }
@@ -89,11 +75,10 @@ public class CorrectionOfTheAnswerMO {
 
     @Override
     public String toString() {
-        return "CorrectionOfTheAnswer{" +
+        return "CorrectionOfTheAnswerMO{" +
                 "correctionOfTheAnswerId=" + correctionOfTheAnswerId +
                 ", messageForAGoodAnswer='" + messageForAGoodAnswer + '\'' +
                 ", messageForWrongAnswer='" + messageForWrongAnswer + '\'' +
-                ", question=" + question +
                 ", responses=" + responses +
                 '}';
     }

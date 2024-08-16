@@ -30,7 +30,6 @@ public class QuestionMO {
     @JoinColumn(name = "correction_of_the_answer_id", referencedColumnName = "correction_of_the_answer_id")
     private CorrectionOfTheAnswerMO correctionOfTheAnswer;
 
-
     public QuestionMO(long questionID, String questionState, Set<ResponseMO> responses, CorrectionOfTheAnswerMO correctionOfTheAnswer) {
         this.questionID = questionID;
         this.questionState = questionState;
