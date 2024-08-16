@@ -30,7 +30,7 @@ public class CorrectionOfTheAnswerMO {
     @ManyToMany
     @JsonManagedReference
     @JoinTable(
-            name = "CorrectionOfTheAnswer_response",
+            name = "correction_response",
             joinColumns = @JoinColumn(name = "correction_of_the_answer_id"),
             inverseJoinColumns = @JoinColumn(name = "response_id")
     )
